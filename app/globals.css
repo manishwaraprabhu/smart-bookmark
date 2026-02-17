@@ -2,19 +2,19 @@
 
 /* Theme Variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f3f4f6; /* light gray background */
+  --foreground: #111827; /* strong dark gray */
 }
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f172a;
+    --foreground: #f8fafc;
   }
 }
 
 /* Base styles */
 body {
-  @apply bg-[var(--background)] text-[var(--foreground)] antialiased;
+  @apply bg-[var(--background)] text-[var(--foreground)] antialiased font-medium;
 }
