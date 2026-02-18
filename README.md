@@ -39,6 +39,85 @@ Deployed on Vercel
 
 ---
 
+## 🎯 Problem Statement
+
+Managing bookmarks across devices can be inconvenient and insecure.  
+Most browsers store bookmarks locally, making it difficult to:
+
+- Access bookmarks from multiple devices
+- Secure bookmarks behind authentication
+- Store bookmarks per user in a centralized database
+
+This project solves these problems by providing:
+
+- Secure Google authentication
+- Cloud-based bookmark storage
+- User-specific data isolation
+- A clean and minimal interface for managing links
+
+---
+
+## 🚧 Challenges Faced & How They Were Solved
+
+### 1️⃣ Authentication & OAuth Redirect Issues
+
+**Problem:**  
+Google OAuth required proper redirect URLs for both local development and production environments.
+
+**Solution:**  
+- Configured correct redirect URLs inside Supabase Authentication settings.
+- Added production domain in Supabase URL configuration.
+- Ensured environment variables were correctly set in both local `.env.local` and Vercel dashboard.
+
+---
+
+### 2️⃣ Environment Variables Not Working in Production
+
+**Problem:**  
+The app worked locally but failed after deployment due to missing environment variables.
+
+**Solution:**  
+- Added `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` inside Vercel Environment Variables.
+- Redeployed the application to ensure variables were available at build time.
+
+---
+
+### 3️⃣ Data Isolation Between Users
+
+**Problem:**  
+Ensuring users can only access their own bookmarks.
+
+**Solution:**  
+- Linked each bookmark to `user_id`.
+- Enabled Row Level Security (RLS) in Supabase.
+- Used authenticated session user ID when inserting data.
+
+---
+
+### 4️⃣ UI Readability Issues
+
+**Problem:**  
+Text appeared too light and thin in production, reducing readability.
+
+**Solution:**  
+- Improved Tailwind text color contrast.
+- Applied stronger font weights (`font-medium`, `font-semibold`).
+- Updated background and border styling for better visual clarity.
+
+---
+
+### 5️⃣ Deployment & Git Workflow
+
+**Problem:**  
+Understanding how code updates reflect on GitHub and Vercel.
+
+**Solution:**  
+- Followed proper Git workflow: `add → commit → push`.
+- Connected GitHub repository to Vercel for automatic redeployment.
+- Verified production builds through Vercel dashboard logs.
+
+---
+
 ## 📂 Project Structure
 
 ```
@@ -68,7 +147,6 @@ Create a `.env.local` file in the root of your project and add:
 
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_public_key
-
 
 ```
 
@@ -111,17 +189,12 @@ git clone https://github.com/manishwaraprabhu/smart-bookmark.git
 2. Navigate into the project:
 
 ```
-
 cd smart-bookmark
-
 ```
-
 3. Install dependencies:
 
 ```
-
 npm install
-
 ```
 
 4. Add your environment variables in `.env.local`
@@ -129,9 +202,7 @@ npm install
 5. Run the development server:
 
 ```
-
 npm run dev
-
 ```
 
 Visit:  
@@ -188,5 +259,3 @@ Built by Manishwara Prabhu
 - Vercel for seamless deployment
 - Tailwind CSS for modern styling
 ```
-
----
